@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fo(i,a,b) for(int i=a;i<=b;i++)
+#define vii vector<int>
+
+bool check(string cur, vii v, int n, int k)
+{
+  int len = cur.length();
+
+  if (len < k) return 0;
+
+  for (auto &i : cur) v[i - 'A']--;
+
+  fo(i, 0, 25) if (v[i] > 0) return 0;
+  return 1;
+
+}
+
+int main()
+{
+  vii v(26, 0);
+
+  string s1, s2;
+  cout<<"Enter first string"<<endl;
+  cin >> s1 ;
+  cout<<"Enter second string"<<endl;
+  cin>> s2;
+  cout<<"The required strings are: "<<endl;
+
+  for (auto &i : s2) v[i - 'A']++;
+
+  int n = s1.length();
+  int k = s2.length();
+
+  fo(i, 0, n - 1)
+  {
+    string cur = "";
+
+    fo(j, i, i + k - 1)
+    {
+      cur += s1[j];
+    }
+
+    if (check(cur, v, n, k)) cout << cur << endl;
+  }
+
+
+  return 0;
+
+}
